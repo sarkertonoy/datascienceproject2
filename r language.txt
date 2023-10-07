@@ -1,0 +1,71 @@
+mydata <- read.csv("C:/Titanic.csv", header = TRUE, sep = ",")
+mydata
+
+names(mydata)
+
+str(mydata)
+
+mydata$gender <- factor(mydata$gender,
+                        levels = c(0,1),
+                        labels = c("male", "female"))
+mydata
+
+
+str(mydata)
+
+
+summary(mydata)
+
+
+library(dplyr)
+mydata %>% summarise_if(is.numeric, sd)
+
+
+s<-mydata$fare
+sd(s)
+
+colSums(is.na(mydata))
+
+
+
+mydata$age <- ifelse(is.na(mydata$age),mean(mydata$age, na.rm = TRUE),mydata$age)
+mydata$parch <- ifelse(is.na(mydata$parch),mean(mydata$parch, na.rm = TRUE),mydata$parch)
+mydata$fare <- ifelse(is.na(mydata$fare),mean(mydata$fare, na.rm = TRUE),mydata$fare)
+mydata$gender <- ifelse(is.na(mydata$ gender  ),mean(mydata$ gender  , na.rm = TRUE),mydata$ gender  )
+
+print(mydata)
+
+
+
+
+
+
+
+which(is.na(mydata$gender))
+
+completeness <- sapply(mydata, function(x) sum(!is.na(x)) / length(x))
+print(completeness)
+
+
+
+hist(mydata$fare)
+hist(mydata$gender)
+
+
+mean(mydata$age)
+median(mydata$age)
+var(mydata$age)
+sd(mydata$age)
+
+
+mean(mydata$parch)
+median(mydata$parch)
+var(mydata$parch)
+sd(mydata$parch)
+
+
+
+
+
+
+
